@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +14,7 @@ export class AppComponent {
   res: any;
   apiKey: any;
   processing = false;
+  errorProcessing = false;
   ttsForm: FormGroup;
 
 
@@ -58,16 +58,24 @@ export class AppComponent {
     }
   })
     .subscribe(data => {
-
       this.res = this.sanitizer.bypassSecurityTrustResourceUrl('data:audio/mp3;base64,' + data['audioContent']);
       this.processing = false;
-
-    });
+    },
+    error => {
+      // console.log(error.error.error.status);
+      this.errorProcessing = true;
+    },
+    );
   }
 
   clearStorage() {
     localStorage.clear();
     this.ttsForm.controls.apiKey.reset();
+  }
+
+  closeAlert() {
+    this.errorProcessing = false;
+    this.processing = false;
   }
 }
 
