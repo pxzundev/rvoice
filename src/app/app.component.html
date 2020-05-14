@@ -39,9 +39,12 @@
               <label class="label label-light font-weight-light text-primary">Voice Name</label>
               <select formControlName="voiceName" required class="form-control">
                 <option value="Wavenet-A">Wavenet-A</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'" value="Wavenet-B">Wavenet-B</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'" value="Wavenet-C">Wavenet-C</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'" value="Wavenet-D">Wavenet-D</option>
+                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'"
+                  value="Wavenet-B">Wavenet-B</option>
+                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'"
+                  value="Wavenet-C">Wavenet-C</option>
+                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'"
+                  value="Wavenet-D">Wavenet-D</option>
                 <option *ngIf="ttsForm.controls.langCode.value == 'en-US'" value="Wavenet-E">Wavenet-E</option>
                 <option *ngIf="ttsForm.controls.langCode.value == 'en-US'" value="Wavenet-F">Wavenet-F</option>
               </select>
@@ -106,7 +109,7 @@
         <button *ngIf="processing" [disabled]="true" type="button" class="btn btn-lg btn-primary">
           Processing
         </button>
-        
+
       </div>
 
       <div class="btn-group float-right">
@@ -122,4 +125,3 @@
     </div>
   </div>
 </form>
-
