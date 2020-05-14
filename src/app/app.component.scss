@@ -1,0 +1,13 @@
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+    width: 90%;
+    top: 20px;
+    // min-height: 85vh;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    background: some-image or svg;
+  }
