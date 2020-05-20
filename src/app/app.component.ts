@@ -33,6 +33,7 @@ export class AppComponent {
   }
 
   onSubmit() {
+    console.log(this.ttsForm.value.langCode + '-' + this.ttsForm.value.voiceName);
     this.processing = true;
     this.req = {
       audioConfig: {

@@ -28,6 +28,7 @@
             <div class="form-group">
               <label class="label label-light font-weight-light text-primary">Language Code</label>
               <select formControlName="langCode" required class="form-control">
+                <option value="en-AU">en-AU</option>
                 <option value="en-US">en-US</option>
                 <option value="en-GB">en-GB</option>
                 <option value="fil-PH">fil-PH</option>
@@ -39,11 +40,11 @@
               <label class="label label-light font-weight-light text-primary">Voice Name</label>
               <select formControlName="voiceName" required class="form-control">
                 <option value="Wavenet-A">Wavenet-A</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'"
+                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
                   value="Wavenet-B">Wavenet-B</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'"
+                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
                   value="Wavenet-C">Wavenet-C</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB'"
+                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
                   value="Wavenet-D">Wavenet-D</option>
                 <option *ngIf="ttsForm.controls.langCode.value == 'en-US'" value="Wavenet-E">Wavenet-E</option>
                 <option *ngIf="ttsForm.controls.langCode.value == 'en-US'" value="Wavenet-F">Wavenet-F</option>
@@ -78,7 +79,7 @@
           </div>
         </div>
         <p style="font-size: 0.8em" class="text-primary px-1">
-          <a href="https://cloud.google.com/text-to-speech/docs/voices" target="_blank">Click here to ee a list of
+          <a href="https://cloud.google.com/text-to-speech/docs/voices" target="_blank">Click here to see a list of
             available Google Wavenet Voices</a>
         </p>
       </div>
