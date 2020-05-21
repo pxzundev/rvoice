@@ -40,11 +40,14 @@
               <label class="label label-light font-weight-light text-primary">Voice Name</label>
               <select formControlName="voiceName" required class="form-control">
                 <option value="Wavenet-A">Wavenet-A</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
+                <option
+                  *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
                   value="Wavenet-B">Wavenet-B</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
+                <option
+                  *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
                   value="Wavenet-C">Wavenet-C</option>
-                <option *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
+                <option
+                  *ngIf="ttsForm.controls.langCode.value == 'en-US' || ttsForm.controls.langCode.value == 'en-GB' || ttsForm.controls.langCode.value == 'en-AU'"
                   value="Wavenet-D">Wavenet-D</option>
                 <option *ngIf="ttsForm.controls.langCode.value == 'en-US'" value="Wavenet-E">Wavenet-E</option>
                 <option *ngIf="ttsForm.controls.langCode.value == 'en-US'" value="Wavenet-F">Wavenet-F</option>
@@ -58,7 +61,7 @@
                 <option value="MALE">Male</option>
                 <option value="FEMALE">Female</option>
                 <option value="NEUTRAL">Neutral</option>
-              
+
               </select>
             </div>
           </div>
@@ -99,20 +102,84 @@
 
     </div>
     <div class="card-body">
-      <h5 class="card-title">Paste your text here</h5>
+      <!-- <h5 class="card-title">Paste your text here</h5> -->
 
-      <div class="btn-group" *ngIf="!errorProcessing">
-        <button (click)="insertText()" type="button"
-          class="btn btn-lg btn-primary">
-          Insert
-        </button>
+
+
+      
+      <div class="btn-group btn-group-sm" role="group">
+        <div class="btn-group" dropdown>
+          <button type="button" class="btn btn-secondary" (click)="wrapPara('p')">Paragraph wrap</button>
+          <button type="button" class="btn btn-secondary" (click)="wrapPara('s')">Sentence wrap</button>
+        </div>
+
+        
+        <div class="btn-group" dropdown>
+          <button id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+            aria-controls="dropdown-animated">
+            Break <span class="caret"></span>
+          </button>
+          <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('250ms')">250ms</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('500ms')">500ms</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('750ms')">750ms</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('1000ms')">1000ms</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('1500ms')">1500ms</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('2000ms')">2000ms</a></li>
+            <li class="dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('x-weak')">Extra weak</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('weak')">Weak</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('medium')">Medium</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('strong')">Strong</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="insertBreak('x-strong')">Extra strong</a></li>
+          </ul>
+        </div>
+
+ 
+
+        <div class="btn-group" dropdown>
+          <button id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+            aria-controls="dropdown-animated">
+            Say-as <span class="caret"></span>
+          </button>
+          <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+            <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('cardinal')">Cardinal</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('ordinal')">Ordinal</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('characters')">Characters</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('fraction')">Fraction</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('expletive')">Expletive</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('unit')">Unit</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('verbatim')">Verbatim</a></li>
+            <!-- <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('dateyyyymmdd')">Date yyyymmdd</a></li> -->
+            <!-- <li role="menuitem"><a class="dropdown-item" (click)="interpretAs('date')">Date yyyymmdd</a></li> -->
+          </ul>
+        </div>
+
+        <div class="btn-group" dropdown>
+          <button id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+            aria-controls="dropdown-animated">
+            Emphasis <span class="caret"></span>
+          </button>
+          <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('strong')">Strong</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('moderate')">Moderate</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('none')">None</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('reduced')">Reduced</a></li>
+          </ul>
+        </div>
+
+   
+
+
+
+
+
+
       </div>
-      <div class="btn-group" *ngIf="!errorProcessing">
-        <button (click)="wrapText()" type="button"
-          class="btn btn-lg btn-primary">
-          Wrap
-        </button>
-      </div>
+      <div style="height: 10px"></div>
+
+
+
 
 
 

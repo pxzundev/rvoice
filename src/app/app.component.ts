@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as textFieldEdit from 'text-field-edit';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'app-root',
@@ -43,8 +44,42 @@ export class AppComponent {
 
   wrapText() {
     const field = document.querySelector('textarea');
-    textFieldEdit.wrapSelection(field, '**');
+    textFieldEdit.wrapSelection(field, '(', '****');
   }
+
+  insertBreak(param: string) {
+    const input = document.querySelector('textarea');
+
+    if (param === 'x-weak' || param === 'weak' || param === 'medium' || param === 'strong' || param === 'x-strong') {
+      textFieldEdit.insert(input, '<break strength="' + param + '"/>');
+    } else {
+      textFieldEdit.insert(input, '<break time="' + param + '"/>');
+    }
+
+  }
+
+  interpretAs(param: any) {
+    const field = document.querySelector('textarea');
+    textFieldEdit.wrapSelection(field, '<say-as interpret-as="' + param + '">', '</say-as>')
+  }
+
+  emphasis(param: any) {
+    const field = document.querySelector('textarea');
+    textFieldEdit.wrapSelection(field, '<emphasis level="' + param + '">', '</emphasis>')
+  }
+
+  wrapPara(param: any) {
+    const field = document.querySelector('textarea');
+
+    if (param === 'p') {
+      textFieldEdit.wrapSelection(field, '<p>', '</p>')
+    } else {
+      textFieldEdit.wrapSelection(field, '<s>', '</s>')
+
+    }
+  }
+
+
 
   onSubmit() {
     console.log(this.ttsForm.value.langCode + '-' + this.ttsForm.value.voiceName);
@@ -58,7 +93,7 @@ export class AppComponent {
       },
       input: {
         // text: this.ttsForm.value.inputText,
-        ssml: this.ttsForm.value.inputText,
+        ssml: '<speak>' + this.ttsForm.value.inputText + '</speak>',
         // ssml: '<speak>hello</speak>',
       },
       voice: {
