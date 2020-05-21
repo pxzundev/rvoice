@@ -10,7 +10,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AppComponent {
   title = 'RVoicesAngular8';
-  req: ApiReq;
+  // req: ApiReq;
+  req: any;
   res: any;
   apiKey: any;
   processing = false;
@@ -21,11 +22,12 @@ export class AppComponent {
   constructor(private fb: FormBuilder, private http: HttpClient, private sanitizer: DomSanitizer) {
     this.ttsForm = this.fb.group({
       apiKey: localStorage.getItem('apiKey'),
-      inputText: '',
+      inputText: localStorage.getItem('textContent'),
       langCode: ['en-US'],
       voiceName: ['Wavenet-D'],
       speed: ['1'],
-      pitch: ['1']
+      pitch: ['1'],
+      gender: ['NEUTRAL'],
     });
 
     // this.apiKey = localStorage.getItem('apiKey')
@@ -43,15 +45,19 @@ export class AppComponent {
 
       },
       input: {
-        text: this.ttsForm.value.inputText
+        // text: this.ttsForm.value.inputText,
+        ssml: this.ttsForm.value.inputText,
+        // ssml: '<speak>hello</speak>',
       },
       voice: {
         languageCode: this.ttsForm.value.langCode,
-        name: this.ttsForm.value.langCode + '-' + this.ttsForm.value.voiceName
+        name: this.ttsForm.value.langCode + '-' + this.ttsForm.value.voiceName,
+        ssmlGender: this.ttsForm.value.gender
       }
     };
     // console.log(this.req);
     localStorage.setItem('apiKey', this.ttsForm.value.apiKey);
+    localStorage.setItem('textContent', this.ttsForm.value.inputText);
     this.res = undefined;
     this.http.post('https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=' + this.ttsForm.controls.apiKey.value, this.req, {
     headers: {

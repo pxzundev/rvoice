@@ -24,7 +24,7 @@
 
         </div>
         <div class="row">
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-md-2">
             <div class="form-group">
               <label class="label label-light font-weight-light text-primary">Language Code</label>
               <select formControlName="langCode" required class="form-control">
@@ -53,6 +53,17 @@
           </div>
           <div class="col-6 col-md-3">
             <div class="form-group">
+              <label class="label label-light font-weight-light text-primary">Gender</label>
+              <select formControlName="gender" required class="form-control">
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+                <option value="NEUTRAL">Neutral</option>
+              
+              </select>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="form-group">
               <label class="label label-light font-weight-light text-primary">Speed</label>
               <select formControlName="speed" required class="form-control">
                 <option value=".5">0.50</option>
@@ -65,7 +76,7 @@
               </select>
             </div>
           </div>
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-md-2">
             <div class="form-group">
               <label class="label label-light font-weight-light text-primary">Pitch</label>
               <select formControlName="pitch" required class="form-control">
