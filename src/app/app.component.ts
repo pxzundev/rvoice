@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import * as textFieldEdit from 'text-field-edit';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,17 @@ export class AppComponent {
 
     // this.apiKey = localStorage.getItem('apiKey')
     // console.log(this.apiKey);
+    // const resetButton = document.querySelector('.js-markdown-reset-field');
+  }
+
+  insertText() {
+    const input = document.querySelector('textarea');
+    textFieldEdit.insert(input, '🥳');
+  }
+
+  wrapText() {
+    const field = document.querySelector('textarea');
+    textFieldEdit.wrapSelection(field, '**');
   }
 
   onSubmit() {
@@ -60,19 +72,19 @@ export class AppComponent {
     localStorage.setItem('textContent', this.ttsForm.value.inputText);
     this.res = undefined;
     this.http.post('https://texttospeech.googleapis.com/v1beta1/text:synthesize?key=' + this.ttsForm.controls.apiKey.value, this.req, {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .subscribe(data => {
-      this.res = this.sanitizer.bypassSecurityTrustResourceUrl('data:audio/mp3;base64,' + data['audioContent']);
-      this.processing = false;
-    },
-    error => {
-      // console.log(error.error.error.status);
-      this.errorProcessing = true;
-    },
-    );
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .subscribe(data => {
+        this.res = this.sanitizer.bypassSecurityTrustResourceUrl('data:audio/mp3;base64,' + data['audioContent']);
+        this.processing = false;
+      },
+        error => {
+          // console.log(error.error.error.status);
+          this.errorProcessing = true;
+        },
+      );
   }
 
   clearStorage() {
@@ -84,7 +96,11 @@ export class AppComponent {
     this.errorProcessing = false;
     this.processing = false;
   }
+
+
 }
+
+
 
 export interface ApiReq {
 
