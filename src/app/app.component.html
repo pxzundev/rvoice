@@ -168,9 +168,23 @@
           </ul>
         </div>
 
-   
+   <div class="btn-group" dropdown>
+          <button id="button-animated" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
+            aria-controls="dropdown-animated">
+            Emphasis <span class="caret"></span>
+          </button>
+          <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('strong')">
+              <label>
+                <input type="checkbox"> Cheese
+              </label>          </a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('moderate')">Moderate</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('none')">None</a></li>
+            <li role="menuitem"><a class="dropdown-item" (click)="emphasis('reduced')">Reduced</a></li>
+          </ul>
+        </div>
 
-
+        
 
 
 
